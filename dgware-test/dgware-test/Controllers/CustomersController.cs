@@ -22,84 +22,84 @@ namespace dgware_test.Controllers
             return db.Customers;
         }
 
-        //// GET: api/Customers/5
-        //[ResponseType(typeof(Customers))]
-        //public IHttpActionResult GetCustomers(int id)
-        //{
-        //    Customers customers = db.Customers.Find(id);
-        //    if (customers == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Customers/5
+        [ResponseType(typeof(Customers))]
+        public IHttpActionResult GetCustomers(int id)
+        {
+            Customers customers = db.Customers.Find(id);
+            if (customers == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(customers);
-        //}
+            return Ok(customers);
+        }
 
-        //// PUT: api/Customers/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutCustomers(int id, Customers customers)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // PUT: api/Customers/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCustomers(int id, Customers customers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != customers.CustomerID)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (id != customers.CustomerID)
+            {
+                return BadRequest();
+            }
 
-        //    db.Entry(customers).State = EntityState.Modified;
+            db.Entry(customers).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CustomersExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CustomersExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
-        //// POST: api/Customers
-        //[ResponseType(typeof(Customers))]
-        //public IHttpActionResult PostCustomers(Customers customers)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Customers
+        [ResponseType(typeof(Customers))]
+        public IHttpActionResult PostCustomers(Customers customers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.Customers.Add(customers);
-        //    db.SaveChanges();
+            db.Customers.Add(customers);
+            db.SaveChanges();
 
-        //    return CreatedAtRoute("DefaultApi", new { id = customers.CustomerID }, customers);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = customers.CustomerID }, customers);
+        }
 
-        //// DELETE: api/Customers/5
-        //[ResponseType(typeof(Customers))]
-        //public IHttpActionResult DeleteCustomers(int id)
-        //{
-        //    Customers customers = db.Customers.Find(id);
-        //    if (customers == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Customers/5
+        [ResponseType(typeof(Customers))]
+        public IHttpActionResult DeleteCustomers(int id)
+        {
+            Customers customers = db.Customers.Find(id);
+            if (customers == null)
+            {
+                return NotFound();
+            }
 
-        //    db.Customers.Remove(customers);
-        //    db.SaveChanges();
+            db.Customers.Remove(customers);
+            db.SaveChanges();
 
-        //    return Ok(customers);
-        //}
+            return Ok(customers);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -110,9 +110,9 @@ namespace dgware_test.Controllers
             base.Dispose(disposing);
         }
 
-        //private bool CustomersExists(int id)
-        //{
-        //    return db.Customers.Count(e => e.CustomerID == id) > 0;
-        //}
+        private bool CustomersExists(int id)
+        {
+            return db.Customers.Count(e => e.CustomerID == id) > 0;
+        }
     }
 }

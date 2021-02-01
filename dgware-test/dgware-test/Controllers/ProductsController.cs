@@ -22,84 +22,84 @@ namespace dgware_test.Controllers
             return db.Products;
         }
 
-        //// GET: api/Products/5
-        //[ResponseType(typeof(Products))]
-        //public IHttpActionResult GetProducts(int id)
-        //{
-        //    Products products = db.Products.Find(id);
-        //    if (products == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Products/5
+        [ResponseType(typeof(Products))]
+        public IHttpActionResult GetProducts(int id)
+        {
+            Products products = db.Products.Find(id);
+            if (products == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(products);
-        //}
+            return Ok(products);
+        }
 
-        //// PUT: api/Products/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutProducts(int id, Products products)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // PUT: api/Products/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutProducts(int id, Products products)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != products.ProductID)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (id != products.ProductID)
+            {
+                return BadRequest();
+            }
 
-        //    db.Entry(products).State = EntityState.Modified;
+            db.Entry(products).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ProductsExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductsExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
-        //// POST: api/Products
-        //[ResponseType(typeof(Products))]
-        //public IHttpActionResult PostProducts(Products products)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Products
+        [ResponseType(typeof(Products))]
+        public IHttpActionResult PostProducts(Products products)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.Products.Add(products);
-        //    db.SaveChanges();
+            db.Products.Add(products);
+            db.SaveChanges();
 
-        //    return CreatedAtRoute("DefaultApi", new { id = products.ProductID }, products);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = products.ProductID }, products);
+        }
 
-        //// DELETE: api/Products/5
-        //[ResponseType(typeof(Products))]
-        //public IHttpActionResult DeleteProducts(int id)
-        //{
-        //    Products products = db.Products.Find(id);
-        //    if (products == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Products/5
+        [ResponseType(typeof(Products))]
+        public IHttpActionResult DeleteProducts(int id)
+        {
+            Products products = db.Products.Find(id);
+            if (products == null)
+            {
+                return NotFound();
+            }
 
-        //    db.Products.Remove(products);
-        //    db.SaveChanges();
+            db.Products.Remove(products);
+            db.SaveChanges();
 
-        //    return Ok(products);
-        //}
+            return Ok(products);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -110,9 +110,9 @@ namespace dgware_test.Controllers
             base.Dispose(disposing);
         }
 
-        //private bool ProductsExists(int id)
-        //{
-        //    return db.Products.Count(e => e.ProductID == id) > 0;
-        //}
+        private bool ProductsExists(int id)
+        {
+            return db.Products.Count(e => e.ProductID == id) > 0;
+        }
     }
 }

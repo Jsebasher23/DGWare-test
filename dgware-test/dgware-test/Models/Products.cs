@@ -22,7 +22,7 @@ namespace dgware_test.Models
     
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public decimal ProductUniPrice { get; set; }
+        public Nullable<decimal> ProductUniPrice { get; set; }
         public int ProductCategoryID { get; set; }
     
         public virtual Categories Categories { get; set; }

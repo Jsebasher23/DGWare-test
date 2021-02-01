@@ -18,6 +18,8 @@ namespace dgware_test.Models
         public DBModel()
             : base("name=DBModel")
         {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,7 +27,6 @@ namespace dgware_test.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Billing> Billing { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Products> Products { get; set; }

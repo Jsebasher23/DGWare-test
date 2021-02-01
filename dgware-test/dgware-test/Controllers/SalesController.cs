@@ -22,84 +22,96 @@ namespace dgware_test.Controllers
             return db.Sales;
         }
 
-        //// GET: api/Sales/5
-        //[ResponseType(typeof(Sales))]
-        //public IHttpActionResult GetSales(int id)
-        //{
-        //    Sales sales = db.Sales.Find(id);
-        //    if (sales == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Sales/5
+        [ResponseType(typeof(Sales))]
+        public IHttpActionResult GetSales(int id)
+        {
+            Sales sales = db.Sales.Find(id);
+            if (sales == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(sales);
-        //}
+            return Ok(sales);
+        }
 
-        //// PUT: api/Sales/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutSales(int id, Sales sales)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // PUT: api/Sales/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutSales(int id, Sales sales)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != sales.SaleID)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (id != sales.SaleID)
+            {
+                return BadRequest();
+            }
 
-        //    db.Entry(sales).State = EntityState.Modified;
+            db.Entry(sales).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SalesExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SalesExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
-        //// POST: api/Sales
-        //[ResponseType(typeof(Sales))]
-        //public IHttpActionResult PostSales(Sales sales)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Sales
+        [ResponseType(typeof(Sales))]
+        public IHttpActionResult PostSales(Sales sales)
+        {
+            try
+            {
+                db.Sales.Add(sales);
+                foreach (var item in sales.SaleDetails)
+                {
+                    db.SaleDetails.Add(item);
+                }
 
-        //    db.Sales.Add(sales);
-        //    db.SaveChanges();
+                db.SaveChanges();
 
-        //    return CreatedAtRoute("DefaultApi", new { id = sales.SaleID }, sales);
-        //}
+                return Ok();                
 
-        //// DELETE: api/Sales/5
-        //[ResponseType(typeof(Sales))]
-        //public IHttpActionResult DeleteSales(int id)
-        //{
-        //    Sales sales = db.Sales.Find(id);
-        //    if (sales == null)
-        //    {
-        //        return NotFound();
-        //    }
+            }
+            catch (Exception ex)
+            {
 
-        //    db.Sales.Remove(sales);
-        //    db.SaveChanges();
+                throw ex;
+            }            
 
-        //    return Ok(sales);
-        //}
+            
+
+        }
+
+        // DELETE: api/Sales/5
+        [ResponseType(typeof(Sales))]
+        public IHttpActionResult DeleteSales(int id)
+        {
+            Sales sales = db.Sales.Find(id);
+            if (sales == null)
+            {
+                return NotFound();
+            }
+
+            db.Sales.Remove(sales);
+            db.SaveChanges();
+
+            return Ok(sales);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -110,9 +122,9 @@ namespace dgware_test.Controllers
             base.Dispose(disposing);
         }
 
-        //private bool SalesExists(int id)
-        //{
-        //    return db.Sales.Count(e => e.SaleID == id) > 0;
-        //}
+        private bool SalesExists(int id)
+        {
+            return db.Sales.Count(e => e.SaleID == id) > 0;
+        }
     }
 }

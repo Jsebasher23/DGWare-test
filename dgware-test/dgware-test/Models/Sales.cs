@@ -24,7 +24,7 @@ namespace dgware_test.Models
         public Nullable<System.DateTime> SaleDate { get; set; }
         public int SaleCustomerID { get; set; }
         public int SaleTraderID { get; set; }
-        public decimal SaleTOTAL { get; set; }
+        public Nullable<decimal> SaleTOTAL { get; set; }
     
         public virtual Customers Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

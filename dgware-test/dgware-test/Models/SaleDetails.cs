@@ -15,14 +15,13 @@ namespace dgware_test.Models
     public partial class SaleDetails
     {
         public int SDetailID { get; set; }
-        public Nullable<System.DateTime> SDetailDate { get; set; }
         public int SDetailSaleID { get; set; }
         public int SDetailProductID { get; set; }
-        public int SDetailBillID { get; set; }
-        public decimal SDetailTOTAL { get; set; }
-        public int SDetailQuantity { get; set; }
+        public Nullable<decimal> SDetailTOTAL { get; set; }
+        public Nullable<int> SDetailQuantity { get; set; }
+        public Nullable<decimal> SDetailPrice { get; set; }
+        public string SDetailName { get; set; }
     
-        public virtual Billing Billing { get; set; }
         public virtual Products Products { get; set; }
         public virtual Sales Sales { get; set; }
     }

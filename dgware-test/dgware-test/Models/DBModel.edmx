@@ -4,21 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DIgitalWarePruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Billing">
-          <Key>
-            <PropertyRef Name="BillID" />
-          </Key>
-          <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BillDate" Type="date" />
-          <Property Name="BillTotal" Type="money" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="DIgitalWarePruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -26,20 +18,20 @@
           </Key>
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerNumIde" Type="int" />
-          <Property Name="CustomerTypeIde" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="CustomerName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="CustomerLastName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CustomerTypeIde" Type="varchar" MaxLength="3" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="30" />
+          <Property Name="CustomerLastName" Type="varchar" MaxLength="15" />
           <Property Name="CustomerBirthDate" Type="date" />
           <Property Name="CustomerAGE" Type="int" />
-          <Property Name="CustomerEmail" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CustomerEmail" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="ProductUniPrice" Type="money" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="15" />
+          <Property Name="ProductUniPrice" Type="money" />
           <Property Name="ProductCategoryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SaleDetails">
@@ -47,12 +39,12 @@
             <PropertyRef Name="SDetailID" />
           </Key>
           <Property Name="SDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SDetailDate" Type="date" />
           <Property Name="SDetailSaleID" Type="int" Nullable="false" />
           <Property Name="SDetailProductID" Type="int" Nullable="false" />
-          <Property Name="SDetailBillID" Type="int" Nullable="false" />
-          <Property Name="SDetailTOTAL" Type="money" Nullable="false" />
-          <Property Name="SDetailQuantity" Type="int" Nullable="false" />
+          <Property Name="SDetailTOTAL" Type="money" />
+          <Property Name="SDetailQuantity" Type="int" />
+          <Property Name="SDetailPrice" Type="money" />
+          <Property Name="SDetailName" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Sales">
           <Key>
@@ -62,7 +54,7 @@
           <Property Name="SaleDate" Type="date" />
           <Property Name="SaleCustomerID" Type="int" Nullable="false" />
           <Property Name="SaleTraderID" Type="int" Nullable="false" />
-          <Property Name="SaleTOTAL" Type="money" Nullable="false" />
+          <Property Name="SaleTOTAL" Type="money" />
         </EntityType>
         <EntityType Name="Trader">
           <Key>
@@ -70,9 +62,9 @@
           </Key>
           <Property Name="TraderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TraderNumIde" Type="int" />
-          <Property Name="TraderTypeIde" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="TraderName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="TraderPhone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TraderTypeIde" Type="varchar" MaxLength="3" />
+          <Property Name="TraderName" Type="varchar" MaxLength="15" />
+          <Property Name="TraderPhone" Type="varchar" MaxLength="15" />
         </EntityType>
         <Association Name="FK_ProductCategoryID">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
@@ -110,18 +102,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SDetailBillID">
-          <End Role="Billing" Type="Self.Billing" Multiplicity="1" />
-          <End Role="SaleDetails" Type="Self.SaleDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Billing">
-              <PropertyRef Name="BillID" />
-            </Principal>
-            <Dependent Role="SaleDetails">
-              <PropertyRef Name="SDetailBillID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SDetailProductID">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="SaleDetails" Type="Self.SaleDetails" Multiplicity="*" />
@@ -147,7 +127,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DIgitalWarePruebaModelStoreContainer">
-          <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -166,10 +145,6 @@
             <End Role="Trader" EntitySet="Trader" />
             <End Role="Sales" EntitySet="Sales" />
           </AssociationSet>
-          <AssociationSet Name="FK_SDetailBillID" Association="Self.FK_SDetailBillID">
-            <End Role="Billing" EntitySet="Billing" />
-            <End Role="SaleDetails" EntitySet="SaleDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_SDetailProductID" Association="Self.FK_SDetailProductID">
             <End Role="Products" EntitySet="Products" />
             <End Role="SaleDetails" EntitySet="SaleDetails" />
@@ -179,26 +154,16 @@
             <End Role="SaleDetails" EntitySet="SaleDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DIgitalWarePruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Billing">
-          <Key>
-            <PropertyRef Name="BillID" />
-          </Key>
-          <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BillDate" Type="DateTime" Precision="0" />
-          <Property Name="BillTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="SaleDetails" Relationship="Self.FK_SDetailBillID" FromRole="Billing" ToRole="SaleDetails" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_ProductCategoryID" FromRole="Categories" ToRole="Products" />
         </EntityType>
         <EntityType Name="Customers">
@@ -206,13 +171,13 @@
             <PropertyRef Name="CustomerID" />
           </Key>
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerNumIde" Type="Int32" />
-          <Property Name="CustomerTypeIde" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustomerName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustomerLastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustomerBirthDate" Type="DateTime" Precision="0" />
-          <Property Name="CustomerAGE" Type="Int32" />
-          <Property Name="CustomerEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerNumIde" Type="Int32" Nullable="true" />
+          <Property Name="CustomerTypeIde" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="CustomerBirthDate" Type="DateTime" Precision="0" Nullable="true" />
+          <Property Name="CustomerAGE" Type="Int32" Nullable="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="true" />
           <NavigationProperty Name="Sales" Relationship="Self.FK_SaleCustomerID" FromRole="Customers" ToRole="Sales" />
         </EntityType>
         <EntityType Name="Products">
@@ -220,8 +185,8 @@
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ProductUniPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ProductUniPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="ProductCategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_ProductCategoryID" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="SaleDetails" Relationship="Self.FK_SDetailProductID" FromRole="Products" ToRole="SaleDetails" />
@@ -231,15 +196,14 @@
             <PropertyRef Name="SDetailID" />
           </Key>
           <Property Name="SDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SDetailDate" Type="DateTime" Precision="0" />
           <Property Name="SDetailSaleID" Type="Int32" Nullable="false" />
           <Property Name="SDetailProductID" Type="Int32" Nullable="false" />
-          <Property Name="SDetailBillID" Type="Int32" Nullable="false" />
-          <Property Name="SDetailTOTAL" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="SDetailQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Billing" Relationship="Self.FK_SDetailBillID" FromRole="SaleDetails" ToRole="Billing" />
+          <Property Name="SDetailTOTAL" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SDetailQuantity" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="Self.FK_SDetailProductID" FromRole="SaleDetails" ToRole="Products" />
           <NavigationProperty Name="Sales" Relationship="Self.FK_SDetailSaleID" FromRole="SaleDetails" ToRole="Sales" />
+          <Property Name="SDetailPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SDetailName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Sales">
           <Key>
@@ -249,7 +213,7 @@
           <Property Name="SaleDate" Type="DateTime" Precision="0" />
           <Property Name="SaleCustomerID" Type="Int32" Nullable="false" />
           <Property Name="SaleTraderID" Type="Int32" Nullable="false" />
-          <Property Name="SaleTOTAL" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SaleTOTAL" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_SaleCustomerID" FromRole="Sales" ToRole="Customers" />
           <NavigationProperty Name="SaleDetails" Relationship="Self.FK_SDetailSaleID" FromRole="Sales" ToRole="SaleDetails" />
           <NavigationProperty Name="Trader" Relationship="Self.FK_SaleTraderID" FromRole="Sales" ToRole="Trader" />
@@ -260,23 +224,11 @@
           </Key>
           <Property Name="TraderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TraderNumIde" Type="Int32" />
-          <Property Name="TraderTypeIde" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TraderName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TraderPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TraderTypeIde" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TraderName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TraderPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Sales" Relationship="Self.FK_SaleTraderID" FromRole="Trader" ToRole="Sales" />
         </EntityType>
-        <Association Name="FK_SDetailBillID">
-          <End Role="Billing" Type="Self.Billing" Multiplicity="1" />
-          <End Role="SaleDetails" Type="Self.SaleDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Billing">
-              <PropertyRef Name="BillID" />
-            </Principal>
-            <Dependent Role="SaleDetails">
-              <PropertyRef Name="SDetailBillID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductCategoryID">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -338,17 +290,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Billing" EntityType="Self.Billing" />
           <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Customers" EntityType="Self.Customers" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="SaleDetails" EntityType="Self.SaleDetails" />
           <EntitySet Name="Sales" EntityType="Self.Sales" />
           <EntitySet Name="Trader" EntityType="Self.Trader" />
-          <AssociationSet Name="FK_SDetailBillID" Association="Self.FK_SDetailBillID">
-            <End Role="Billing" EntitySet="Billing" />
-            <End Role="SaleDetails" EntitySet="SaleDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductCategoryID" Association="Self.FK_ProductCategoryID">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
@@ -376,15 +323,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DIgitalWarePruebaModelStoreContainer" CdmEntityContainer="DBModel">
-          <EntitySetMapping Name="Billing">
-            <EntityTypeMapping TypeName="DIgitalWarePruebaModel.Billing">
-              <MappingFragment StoreEntitySet="Billing">
-                <ScalarProperty Name="BillID" ColumnName="BillID" />
-                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
-                <ScalarProperty Name="BillTotal" ColumnName="BillTotal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="DIgitalWarePruebaModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
@@ -420,11 +358,11 @@
           <EntitySetMapping Name="SaleDetails">
             <EntityTypeMapping TypeName="DIgitalWarePruebaModel.SaleDetails">
               <MappingFragment StoreEntitySet="SaleDetails">
+                <ScalarProperty Name="SDetailName" ColumnName="SDetailName" />
+                <ScalarProperty Name="SDetailPrice" ColumnName="SDetailPrice" />
                 <ScalarProperty Name="SDetailID" ColumnName="SDetailID" />
-                <ScalarProperty Name="SDetailDate" ColumnName="SDetailDate" />
                 <ScalarProperty Name="SDetailSaleID" ColumnName="SDetailSaleID" />
                 <ScalarProperty Name="SDetailProductID" ColumnName="SDetailProductID" />
-                <ScalarProperty Name="SDetailBillID" ColumnName="SDetailBillID" />
                 <ScalarProperty Name="SDetailTOTAL" ColumnName="SDetailTOTAL" />
                 <ScalarProperty Name="SDetailQuantity" ColumnName="SDetailQuantity" />
               </MappingFragment>
