@@ -4,7 +4,7 @@
   <input type="hidden"  name="SDetailName" #SDetailName="ngModel" [(ngModel)]="formData.SDetailName">
   
   <div class="form-group">
-    <label>Food Item</label>
+    <label>Produc</label>
     <select name="SDetailProductID" #SDetailProductID="ngModel" [(ngModel)]="formData.SDetailProductID" class="form-control"
     (change)="updatePrice($event.target)" [class.is-invalid]="!isValid && formData.SDetailProductID==0">
       <option value="0">-Select-</option>
